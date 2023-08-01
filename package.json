@@ -3,13 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "server": "node server.js",
+    "both": "concurrently \"npm run dev\" \"npm run server\""
   },
   "dependencies": {
+    "@prisma/client": "^5.0.0",
+    "bcrypt": "^5.1.0",
+    "bootstrap": "^5.3.1",
+    "concurrently": "^8.2.0",
+    "cookie": "^0.5.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "html5-qrcode": "^2.3.8",
+    "jsonwebtoken": "^9.0.1",
+    "jsqr": "^1.4.0",
     "next": "13.4.12",
+    "nookies": "^2.5.2",
+    "prisma": "^5.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   }

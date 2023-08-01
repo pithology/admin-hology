@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/.idea
 
 # testing
 /coverage
@@ -33,3 +34,41 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/public/assets/
+/public/forms/
+/public/charts-apexcharts.html
+/public/charts-chartjs.html
+/public/charts-echarts.html
+/public/coba.html
+/public/components-accordion.html
+/public/components-alerts.html
+/public/components-badges.html
+/public/components-breadcrumbs.html
+/public/components-buttons.html
+/public/components-cards.html
+/public/components-carousel.html
+/public/components-list-group.html
+/public/components-modal.html
+/public/components-pagination.html
+/public/components-progress.html
+/public/components-tabs.html
+/public/components-spinners.html
+/public/components-tooltips.html
+/public/forms-editors.html
+/public/forms-elements.html
+/public/forms-layouts.html
+/public/forms-validation.html
+/public/icons-bootstrap.html
+/public/icons-boxicons.html
+/public/icons-remix.html
+/public/index.html
+/public/pages-blank.html
+/public/pages-contact.html
+/public/pages-error-404.html
+/public/pages-faq.html
+/public/pages-login.html
+/public/pages-register.html
+/public/Readme.txt
+/public/tables-data.html
+/public/tables-general.html
+/public/users-profile.html
