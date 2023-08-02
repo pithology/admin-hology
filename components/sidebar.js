@@ -2,10 +2,7 @@
 import basepath from "@/components/utils/path";
 import {useEffect, useState} from "react";
 
-export default function Sidebar(props) {
-    const {active} = props;
-    const userDataString = localStorage.getItem('userData');
-    const data = userDataString ? JSON.parse(userDataString) : {};
+export default function Sidebar({active, role}) {
     const [isCompetitionOpen, setCompetitionOpen] = useState(false);
     const [isSeminarOpen, setSeminarOpen] = useState(false);
 
@@ -76,7 +73,7 @@ export default function Sidebar(props) {
                         </li>
                     </ul>
                 </li>
-                {data.admin_role === 'GOD' && (
+                {role === 'GOD' && (
                     <li className="nav-item">
                         <a className={`nav-link ${active === 'Admin Management' ? '' : 'collapsed'}`}
                            href={`${basepath}/management`}>

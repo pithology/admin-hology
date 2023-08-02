@@ -1,10 +1,16 @@
 "use client";
 import basepath from "@/components/utils/path";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 export default function ProfileData() {
-    const userDataString = localStorage.getItem('userData');
-    const data = userDataString ? JSON.parse(userDataString) : {};
+    const [data, setUserData] = useState({});
+    useEffect(() => {
+        const userDataString = localStorage.getItem('userData');
+        if (userDataString) {
+            const userDataObj = JSON.parse(userDataString);
+            setUserData(userDataObj);
+        }
+    }, []);
     return (
         <div className="col-xl-4">
             <div className="card">

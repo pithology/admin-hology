@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
 import Footer from "@/components/footer";
 import ParticipantTable from "@/components/handler/page/competition/participantTable";
 import basepath from "@/components/utils/path";
@@ -13,8 +12,7 @@ export const metadata = {
 export default function ITBC() {
     return (
         <>
-            <Header></Header>
-            <Sidebar active={title}></Sidebar>
+            <Header active={title}></Header>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>{title}</h1>

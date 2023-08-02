@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
 import Footer from "@/components/footer";
 import basepath from "@/components/utils/path";
 import ProfileData from "@/components/handler/page/profile/profileData";
@@ -14,8 +13,7 @@ export const metadata = {
 export default function ChangePassword() {
     return (
         <>
-            <Header></Header>
-            <Sidebar active={title}></Sidebar>
+            <Header active={title}></Header>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>{title}</h1>

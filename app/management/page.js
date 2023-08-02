@@ -1,10 +1,9 @@
 import React from "react";
 import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
 import Footer from "@/components/footer";
 import Management from "@/components/datatable/management";
+import basepath from "@/components/utils/path";
 
-const basepath = process.env.BASE_PATH || '';
 const title = 'Admin Management';
 export const metadata = {
     title: `${title} | Admin Hology 6.0`,
@@ -13,8 +12,7 @@ export const metadata = {
 export default function AdminManagement() {
     return (
         <>
-            <Header></Header>
-            <Sidebar active={title}></Sidebar>
+            <Header active={title}></Header>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>{title}</h1>

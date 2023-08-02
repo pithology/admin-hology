@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
 import Footer from "@/components/footer";
 import QRCodeScanner from "@/components/utils/qrscanner/scanner";
 import Attendant from "@/components/datatable/attendant";
@@ -13,8 +12,7 @@ export const metadata = {
 export default function CheckIn() {
     return (
         <>
-            <Header></Header>
-            <Sidebar active={title}></Sidebar>
+            <Header active={title}></Header>
             <main id="main" className="main">
                 <section>
                     <div className="row">
