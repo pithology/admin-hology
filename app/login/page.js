@@ -1,6 +1,7 @@
 import Test from "@/components/utils/test";
 import Auth from "@/components/handler/auth";
 import basepath from "@/components/utils/path";
+import apiurl from "@/components/utils/api";
 
 const title = 'Login';
 export const metadata = {
@@ -29,8 +30,8 @@ export default function Login() {
                                             <h6 className="card-title text-center pb-0 fs-4">Login Admin</h6>
                                             <p className="text-center small">Enter your email & password to login</p>
                                         </div>
-                                        <Auth></Auth>
-                                        <Test></Test>
+                                        <Auth apiurl={apiurl}></Auth>
+                                        <Test apiurl={apiurl}></Test>
                                     </div>
                                 </div>
                                 <div className="credits">

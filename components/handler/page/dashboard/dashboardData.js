@@ -1,10 +1,9 @@
 "use client";
 import React, {useEffect, useState} from "react";
-import basepath from "@/components/utils/path";
-import apiurl from "@/components/utils/api";
 import DashboardRecent from "@/components/handler/page/dashboard/dashboardRecent";
+import DashboardCompetition from "@/components/handler/page/dashboard/dashboardCompetition";
 
-export default function DashboardData() {
+export default function DashboardData({apiurl, basepath}) {
     const [data, setData] = useState({
         user: 0,
         increase: 0,
@@ -21,7 +20,7 @@ export default function DashboardData() {
             const responseData = await response.json();
             const updatedData = {...data, ...responseData};
             setData(updatedData);
-            if (response.ok){
+            if (response.ok) {
                 setLoading(false);
             }
         } catch (error) {
@@ -64,7 +63,7 @@ export default function DashboardData() {
                             <div className="ps-3">
                                 <h6>{data.user}</h6>
                                 {data.increase === 0 ? (
-                                    <span className="text-muted small pt-2 ps-1">Unchanged</span>
+                                    <span className="text-muted small pt-2 ps-1">No users joined today.</span>
                                 ) : (
                                     <>
                                         <span className="text-success small pt-1 fw-bold">{percentage}%</span>
@@ -97,69 +96,10 @@ export default function DashboardData() {
             </div>
             <div className="col-12">
                 <div className="card recent-sales overflow-auto">
-                    <DashboardRecent></DashboardRecent>
+                    <DashboardRecent apiurl={apiurl} basepath={basepath}></DashboardRecent>
                 </div>
             </div>
-            <div className="col-xxl-4 col-md-4">
-                <div className="card info-card sales-card">
-                    <a href={`${basepath}/competition/ctf`}>
-                        <div className="card-body">
-                            <h5 className="card-title">Capture the Flag</h5>
-                            <div className="d-flex align-items-center">
-                                <div
-                                    className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i className="bi bi-flag"></i>
-                                </div>
-                                <div className="ps-3">
-                                    <h6 className={data.totalCaptureTheFlag === 0 ? "text-danger" : ""}>
-                                        {data.totalCaptureTheFlag} Teams
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div className="col-xxl-4 col-md-4">
-                <div className="card info-card sales-card">
-                    <a href={`${basepath}/competition/itbc`}>
-                        <div className="card-body">
-                            <h5 className="card-title">IT Business Case</h5>
-                            <div className="d-flex align-items-center">
-                                <div
-                                    className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i className="bi bi-briefcase"></i>
-                                </div>
-                                <div className="ps-3">
-                                    <h6 className={data.totalItBusinessCase === 0 ? "text-danger" : ""}>
-                                        {data.totalItBusinessCase} Teams
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div className="col-xxl-4 col-md-4">
-                <div className="card info-card sales-card">
-                    <a href={`${basepath}/competition/uiux`}>
-                        <div className="card-body">
-                            <h5 className="card-title">UI/UX Design</h5>
-                            <div className="d-flex align-items-center">
-                                <div
-                                    className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i className="bi bi-code-slash"></i>
-                                </div>
-                                <div className="ps-3">
-                                    <h6 className={data.totalUiUx === 0 ? "text-danger" : ""}>
-                                        {data.totalUiUx} Teams
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            <DashboardCompetition apiurl={apiurl} basepath={basepath}></DashboardCompetition>
         </div>
     )
 }

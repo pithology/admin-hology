@@ -1,9 +1,7 @@
 "use client";
 import React, {useEffect, useState} from "react";
-import apiurl from "@/components/utils/api";
-import basepath from "@/components/utils/path";
 
-export default function DashboardRecent() {
+export default function DashboardRecent({apiurl, basepath}) {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const fetchData = async () => {
@@ -12,7 +10,7 @@ export default function DashboardRecent() {
             const responseData = await response.json();
             const updatedData = {...data, ...responseData};
             setData(updatedData);
-            if(response.ok){
+            if (response.ok) {
                 setLoading(false);
             }
         } catch (error) {
@@ -54,7 +52,8 @@ export default function DashboardRecent() {
                 {data.competitions.map((competition) => (
                     competition.teams.map((team) => (
                         <tr key={team.team_id}>
-                            <th scope="row"><a href={`${basepath}/competition/detail?team_id=${team.team_id}`}>#{team.team_id}</a></th>
+                            <th scope="row"><a
+                                href={`${basepath}/competition/detail?team_id=${team.team_id}`}>#{team.team_id}</a></th>
                             <td>{team.team_name}</td>
                             <td><a href="#" className="text-primary">{team.team_leader.user_fullname}</a></td>
                             <td>{competition.competition_name}</td>

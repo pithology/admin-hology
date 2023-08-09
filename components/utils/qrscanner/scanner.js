@@ -2,11 +2,26 @@
 import React, {useEffect, useRef, useState} from 'react';
 import jsQR from 'jsqr';
 import QRCodeResultAlert from "@/components/utils/qrscanner/qrcode";
+import {useRouter} from "next/navigation";
 
-export default function QRCodeScanner() {
+export default function QRCodeScanner({apiurl}) {
     const videoRef = useRef(null);
     const [scannedData, setScannedData] = useState('');
+    const router = useRouter();
+    const [token, setToken] = useState('');
+    const [message, setMessage] = useState('');
 
+    useEffect(() => {
+        const userToken = localStorage.getItem('token');
+        if (userToken) {
+            setToken(JSON.parse(userToken));
+        }
+    }, []);
+    useEffect(() => {
+        if (token) {
+            fetchData().then();
+        }
+    }, [scannedData]);
     useEffect(() => {
         let videoStream = null;
         const scanQRCode = () => {
@@ -42,6 +57,29 @@ export default function QRCodeScanner() {
         };
     }, []);
 
+    const fetchData = async () => {
+        try {
+            const response = await fetch(`${apiurl}/seminar/checkin`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token,
+                },
+                body: JSON.stringify({"ticket_uuid": scannedData}),
+            });
+            if (response.status === 403 || response.status === 401) {
+                localStorage.clear();
+                router.push('/401');
+            }
+            const data = await response.json();
+            if (response.ok || response.status === 404) {
+                setMessage(data.message || data.error)
+            }
+        } catch (error) {
+            console.error('Error fetching data from API:', error.message);
+        }
+    };
+
     return (
         <>
             <div className="col-lg-9">
@@ -55,7 +93,7 @@ export default function QRCodeScanner() {
                     </div>
                 </div>
             </div>
-            {scannedData && <QRCodeResultAlert result={scannedData}/>}
+            {scannedData && <QRCodeResultAlert message={message}/>}
         </>
     );
 }

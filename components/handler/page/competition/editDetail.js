@@ -1,9 +1,8 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
-import apiurl from "@/components/utils/api";
 
-export default function EditDetail({status, phase, teamId, nameTeam}) {
+export default function EditDetail({status, phase, teamId, nameTeam, apiurl}) {
     const router = useRouter();
     const [statuses, setStatus] = useState(status);
     const [phases, setPhase] = useState(phase);
@@ -29,7 +28,7 @@ export default function EditDetail({status, phase, teamId, nameTeam}) {
                 body: JSON.stringify({"status": statuses, "phase": phases}),
             });
             if (response.ok) {
-                const data = await response.json();
+                await response.json();
                 localStorage.setItem('successMessage', 'Data berhasil disimpan');
                 window.location.reload();
             } else if (response.status === 403 || response.status === 401) {

@@ -1,9 +1,8 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
-import apiurl from "@/components/utils/api";
 
-export default function Announcement({teamId}) {
+export default function Announcement({teamId, apiurl}) {
     const router = useRouter();
     const [formData, setFormData] = useState({
         title: "",
@@ -52,7 +51,7 @@ export default function Announcement({teamId}) {
                 body: JSON.stringify({"judul": formData.title, "deskripsi": formData.description}),
             });
             if (response.ok) {
-                const data = await response.json();
+                await response.json();
                 localStorage.setItem('successMessage', 'Pengumaman berhasil disimpan');
                 window.location.reload();
             } else if (response.status === 403 || response.status === 401) {
@@ -114,7 +113,8 @@ export default function Announcement({teamId}) {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="reset" className="btn btn-secondary" onClick={handleModalClose}>Close</button>
+                                <button type="reset" className="btn btn-secondary" onClick={handleModalClose}>Close
+                                </button>
                                 <button type="submit" className="btn btn-primary">Save changes</button>
                             </div>
                         </form>

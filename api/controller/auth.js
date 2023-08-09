@@ -36,4 +36,28 @@ async function login(req, res) {
     }
 }
 
-module.exports = {login};
+async function changePassword(req, res) {
+    const {password, new_password} = req.body;
+    const adminId = req.adminId;
+    try {
+        const admin = await prisma.admins.findUnique({where: {admin_id: adminId}});
+        if (!admin) {
+            return res.status(404).json({message: 'Admin not found'});
+        }
+        const isPasswordValid = await bcrypt.compare(password, admin.admin_password);
+        if (!isPasswordValid) return res.status(401).json({message: 'Invalid password'});
+        const hashedNewPassword = await bcrypt.hash(new_password, 10);
+        await prisma.admins.update({
+            where: {admin_id: adminId},
+            data: {
+                admin_password: hashedNewPassword,
+            },
+        });
+        return res.json({message: 'Password updated successfully'});
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({message: 'Internal server error'});
+    }
+}
+
+module.exports = {login, changePassword};

@@ -2,7 +2,9 @@ import Script from "@/components/script";
 import React from 'react'
 import "@/styles/global.css";
 import basepath from "@/components/utils/path";
+import dotenv from "dotenv";
 
+dotenv.config();
 export default function RootLayout({children}) {
     return (
         <html lang="en">

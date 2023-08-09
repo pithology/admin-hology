@@ -1,2 +1,2 @@
-const basepath = process.env.BASE_PATH || 'http://localhost:3001/admin';
+const basepath = process.env.NEXT_PUBLIC_BASE_PATH
 export default basepath;

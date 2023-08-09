@@ -1,9 +1,8 @@
 'use client';
 import {useEffect, useState} from "react";
-import apiurl from "@/components/utils/api";
 import {useRouter} from "next/navigation";
 
-export default function Auth() {
+export default function Auth({apiurl}) {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

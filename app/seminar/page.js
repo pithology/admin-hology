@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Seminar from "@/components/handler/page/seminar/seminar";
 import basepath from "@/components/utils/path";
+import apiurl from "@/components/utils/api";
 
 const title = 'Seminar Attendance';
 export const metadata = {
@@ -12,7 +13,7 @@ export const metadata = {
 export default function SeminarPage() {
     return (
         <>
-            <Header active={title}></Header>
+            <Header active={title} apiurl={apiurl} basepath={basepath}></Header>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>{title}</h1>
@@ -27,7 +28,7 @@ export default function SeminarPage() {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="card">
-                                <Seminar></Seminar>
+                                <Seminar apiurl={apiurl}></Seminar>
                             </div>
                         </div>
                     </div>

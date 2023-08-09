@@ -1,8 +1,7 @@
 "use client";
-import basepath from "@/components/utils/path";
 import React, {useEffect, useState} from "react";
 
-export default function ProfileData() {
+export default function ProfileData({basepath}) {
     const [data, setUserData] = useState({});
     useEffect(() => {
         const userDataString = localStorage.getItem('userData');

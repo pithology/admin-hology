@@ -22,15 +22,20 @@ router.use((req, res, next) => {
 });
 
 router.post('/login', login.login);
+router.post('/changePassword', authenticateToken, login.changePassword);
+
 router.get('/dashboard', dashboard.dashboard);
 router.get('/recent', dashboard.getLatestCompetitions);
-router.get('/ctf', competition.getCaptureTheFlag);
-router.get('/itbc', competition.getITBusinessCase);
-router.get('/uiux', competition.getUIUXDesign);
+
+router.get('/competition', competition.getCompetition);
+router.get('/competition/:competitionId', competition.getCompetitionDetail);
 router.get('/competition/detail/:teamId', competition.getDetail);
 router.post('/competition/statusphase/:teamId', authenticateToken, competition.updateTeamStatusAndPhase);
 router.post('/competition/announcement/:teamId', authenticateToken, competition.setOrUpdateAnnouncement);
-router.get('/seminar', seminar.getSeminar)
+
+router.get('/seminar', seminar.getSeminar);
+router.get('/seminar/history', seminar.getCheckIn)
+router.post('/seminar/checkin', authenticateToken, seminar.checkIn);
 
 router.get('/status', async (req, res) => {
     try {

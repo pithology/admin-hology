@@ -1,12 +1,10 @@
-'use client';
+'use client'
 import {useState} from 'react';
-import apiurl from '@/components/utils/api';
 
-export default function Test() {
+export default function Test({apiurl}) {
     const [apiResponse, setApiResponse] = useState(null);
     const [apiResponseStatus, setApiResponseStatus] = useState('success');
     const [loading, setLoading] = useState(false);
-
     const handleTestApiClick = async () => {
         try {
             setLoading(true);
@@ -20,7 +18,8 @@ export default function Test() {
                 setApiResponseStatus('warning');
             }
         } catch (error) {
-            setApiResponse('Internal Server Error!');
+            console.log(apiurl);
+            setApiResponse(`Internal Server Error!`);
             setApiResponseStatus('danger');
         } finally {
             setLoading(false);
@@ -35,7 +34,7 @@ export default function Test() {
                     type="button"
                     onClick={handleTestApiClick}
                     disabled={loading}
-                >
+                >Test API Server
                     {loading && (
                         <span
                             className="spinner-border spinner-border-sm me-2"
@@ -43,7 +42,6 @@ export default function Test() {
                             aria-hidden="true"
                         ></span>
                     )}
-                    Test Api Server
                 </button>
             </div>
             <div className="col-12 pt-2">

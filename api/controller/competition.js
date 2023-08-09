@@ -1,41 +1,48 @@
 const prisma = require("../provider/client");
 
-async function getCaptureTheFlag(req, res) {
+async function getCompetition(req, res) {
     try {
-        const data = await prisma.teams.findMany({
-            where: {
-                competitions: {
-                    competition_name: 'Capture the Flag',
-                },
-            },
-            select: {
-                team_id: true,
-                team_name: true,
-                team_status: true,
-                team_lead_id: true,
-                team_leader: {
-                    select: {
-                        user_fullname: true,
+        const competitions = await prisma.competitions.findMany();
+        const competitionsWithTeamsCount = await Promise.all(
+            competitions.map(async (competition) => {
+                const teamsCount = await prisma.teams.count({
+                    where: {
+                        competition_id: competition.competition_id,
                     },
-                },
-                join_token: true,
-                phase: true,
-            },
-
-        });
-        return res.status(200).json(data);
+                });
+                return {
+                    id: competition.competition_id,
+                    name: competition.competition_name,
+                    description: competition.competition_description,
+                    teamsCount: teamsCount,
+                };
+            })
+        );
+        return res.status(200).json(competitionsWithTeamsCount);
     } catch (error) {
         console.error(error);
         return res.status(500).json({error: 'Internal server error'});
     }
 }
 
-async function getUIUXDesign(req, res) {
+async function getCompetitionDetail(req, res) {
     try {
+        const competitionId = parseInt(req.params.competitionId);
+        if (isNaN(competitionId)) {
+            return res.status(400).json({error: 'Invalid competitionId provided'});
+        }
+        const competition = await prisma.competitions.findFirst({
+            where: {
+                competition_id: competitionId,
+            }
+        })
+        if (!competition) {
+            return res.status(404).json({error: 'Competition not found'});
+        }
         const data = await prisma.teams.findMany({
             where: {
                 competitions: {
-                    competition_name: 'UI/UX Design',
+                    competition_id: competitionId,
                 },
             },
             select: {
@@ -51,41 +58,13 @@ async function getUIUXDesign(req, res) {
                 join_token: true,
                 phase: true,
             },
-
         });
-        return res.status(200).json(data);
+        const response = {
+            competition: competition,
+            data: data,
+        }
+        return res.status(200).json(response);
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({error: 'Internal server error'});
-    }
-}
-
-async function getITBusinessCase(req, res) {
-    try {
-        const data = await prisma.teams.findMany({
-            where: {
-                competitions: {
-                    competition_name: 'IT Business Case',
-                },
-            },
-            select: {
-                team_id: true,
-                team_name: true,
-                team_status: true,
-                team_lead_id: true,
-                team_leader: {
-                    select: {
-                        user_fullname: true,
-                    },
-                },
-                join_token: true,
-                phase: true,
-            },
-
-        });
-        return res.status(200).json(data);
-    } catch (error) {
-        console.error(error);
         return res.status(500).json({error: 'Internal server error'});
     }
 }
@@ -227,9 +206,8 @@ async function updateTeamStatusAndPhase(req, res) {
 }
 
 module.exports = {
-    getUIUXDesign,
-    getITBusinessCase,
-    getCaptureTheFlag,
+    getCompetition,
+    getCompetitionDetail,
     getDetail,
     setOrUpdateAnnouncement,
     updateTeamStatusAndPhase

@@ -1,13 +1,15 @@
 "use client";
-import basepath from "@/components/utils/path";
 import {useEffect, useState} from "react";
+import CompetitionList from "@/components/handler/page/competition";
+import {useRouter} from "next/navigation";
 
-export default function Sidebar({active, role}) {
+export default function Sidebar({active, role, apiurl, basepath}) {
+    const router = useRouter();
     const [isCompetitionOpen, setCompetitionOpen] = useState(false);
     const [isSeminarOpen, setSeminarOpen] = useState(false);
 
     useEffect(() => {
-        if (active === 'Capture the flag' || active === 'IT Business Case' || active === 'UI/UX Design' || active === 'Detail') {
+        if (active === 'Competition' || active === 'Detail') {
             setCompetitionOpen(true);
         }
         if (active === 'Seminar Attendance' || active === 'Seminar Check-in') {
@@ -17,6 +19,10 @@ export default function Sidebar({active, role}) {
 
     const toggleCompetition = () => setCompetitionOpen(!isCompetitionOpen);
     const toggleSeminar = () => setSeminarOpen(!isSeminarOpen);
+    const handleLogout = () => {
+        localStorage.clear();
+        router.push('/login');
+    };
     return (
         <aside id="sidebar" className="sidebar">
             <ul className="sidebar-nav" id="sidebar-nav">
@@ -27,30 +33,13 @@ export default function Sidebar({active, role}) {
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a className={`nav-link ${active === 'Capture the flag' || active === 'IT Business Case' || active === 'UI/UX Design' || active === 'Detail' ? '' : 'collapsed'}`}
+                    <a className={`nav-link ${active === 'Competition' || active === 'Detail' ? '' : 'collapsed'}`}
                        onClick={toggleCompetition} href="#">
                         <i className="bi bi-code-slash"></i><span>Competition</span><i
                         className="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul className={`nav-content collapse ${isCompetitionOpen ? 'show' : ''}`}>
-                        <li>
-                            <a href={`${basepath}/competition/ctf`}
-                               className={active === 'Capture the flag' ? 'active' : ''}>
-                                <i className="bi bi-circle"></i><span>Capture the flag</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href={`${basepath}/competition/itbc`}
-                               className={active === 'IT Business Case' ? 'active' : ''}>
-                                <i className="bi bi-circle"></i><span>IT Business Case</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href={`${basepath}/competition/uiux`}
-                               className={active === 'UI/UX Design' ? 'active' : ''}>
-                                <i className="bi bi-circle"></i><span>UI/UX Design</span>
-                            </a>
-                        </li>
+                        <CompetitionList apiurl={apiurl} basepath={basepath}></CompetitionList>
                     </ul>
                 </li>
                 <li className="nav-item">
@@ -90,7 +79,7 @@ export default function Sidebar({active, role}) {
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link collapsed" href="#">
+                    <a className="nav-link collapsed" href="#" onClick={handleLogout}>
                         <i className="bi bi-box-arrow-in-right"></i>
                         <span>Log out</span>
                     </a>

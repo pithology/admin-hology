@@ -4,35 +4,18 @@ import Footer from "@/components/footer";
 import ParticipantTable from "@/components/handler/page/competition/participantTable";
 import basepath from "@/components/utils/path";
 import apiurl from "@/components/utils/api";
+
 const title = 'Competition';
 export const metadata = {
     title: `${title} | Admin Hology 6.0`,
     description: "Created With love",
 };
-export default function CTF() {
+export default function Competition() {
     return (
         <>
             <Header active={title} apiurl={apiurl} basepath={basepath}></Header>
             <main id="main" className="main">
-                <div className="pagetitle">
-                    <h1>{title}</h1>
-                    <nav>
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href={`${basepath}`}>Home</a></li>
-                            <li className="breadcrumb-item">Competition</li>
-                            <li className="breadcrumb-item active">{title}</li>
-                        </ol>
-                    </nav>
-                </div>
-                <section>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="card">
-                                <ParticipantTable target={'ctf'}></ParticipantTable>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <ParticipantTable apiurl={apiurl} basepath={basepath}></ParticipantTable>
             </main>
             <Footer></Footer>
         </>

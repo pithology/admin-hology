@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Detail from "@/components/handler/page/competition/detail";
 import basepath from "@/components/utils/path";
+import apiurl from "@/components/utils/api";
 
 const title = 'Detail';
 export const metadata = {
@@ -12,7 +13,7 @@ export const metadata = {
 export default function DetailCompetition() {
     return (
         <>
-            <Header active={title}></Header>
+            <Header active={title} basepath={basepath} apiurl={apiurl}></Header>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>{title}</h1>
@@ -26,7 +27,7 @@ export default function DetailCompetition() {
                 </div>
                 <section className="section profile">
                     <div className="row">
-                        <Detail></Detail>
+                        <Detail apiurl={apiurl}></Detail>
                     </div>
                 </section>
             </main>

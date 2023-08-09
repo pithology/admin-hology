@@ -1,8 +1,7 @@
 'use client'
 import React, {useEffect, useState} from "react";
-import apiurl from "@/components/utils/api";
 
-export default function Seminar() {
+export default function Seminar({apiurl}) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const fetchData = async () => {
@@ -60,7 +59,8 @@ export default function Seminar() {
                         <td>{item.ticket_uuid}</td>
                         <td>{item.present ? 'Yes' : 'No'}</td>
                         <td>
-                            <a href={item.ig_story} className="btn btn-primary btn-sm" target="_blank">Redirect to link...</a>
+                            <a href={item.ig_story} className="btn btn-primary btn-sm" target="_blank">Redirect to
+                                link...</a>
                         </td>
                     </tr>
                 ))}

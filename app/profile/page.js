@@ -4,6 +4,7 @@ import Footer from "@/components/footer";
 import basepath from "@/components/utils/path";
 import ProfileData from "@/components/handler/page/profile/profileData";
 import ChangePasswordForm from "@/components/handler/page/profile/changePassword";
+import apiurl from "@/components/utils/api";
 
 const title = 'Profile Settings';
 export const metadata = {
@@ -13,7 +14,7 @@ export const metadata = {
 export default function ChangePassword() {
     return (
         <>
-            <Header active={title}></Header>
+            <Header active={title} apiurl={apiurl} basepath={basepath}></Header>
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>{title}</h1>
@@ -26,8 +27,8 @@ export default function ChangePassword() {
                 </div>
                 <section className="section profile">
                     <div className="row">
-                        <ProfileData></ProfileData>
-                        <ChangePasswordForm></ChangePasswordForm>
+                        <ProfileData basepath={basepath}></ProfileData>
+                        <ChangePasswordForm apiurl={apiurl}></ChangePasswordForm>
                     </div>
                 </section>
             </main>

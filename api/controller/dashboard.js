@@ -4,29 +4,8 @@ async function dashboard(req, res) {
     try {
         const totalUsers = await prisma.users.count();
         const totalSeminars = await prisma.user_seminars.count();
-        const totalUiUx = await prisma.teams.count({
-            where: {
-                competitions: {
-                    competition_name: 'UI/UX Design',
-                },
-            },
-        });
 
-        const totalItBusinessCase = await prisma.teams.count({
-            where: {
-                competitions: {
-                    competition_name: 'IT Business Case',
-                },
-            },
-        });
-
-        const totalCaptureTheFlag = await prisma.teams.count({
-            where: {
-                competitions: {
-                    competition_name: 'Capture the Flag',
-                },
-            },
-        });
+        const totalCompetition = await prisma.teams.count();
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -37,15 +16,12 @@ async function dashboard(req, res) {
                 },
             },
         });
-        const totalActivity = totalSeminars + totalUiUx + totalItBusinessCase + totalCaptureTheFlag;
+        const totalActivity = totalSeminars + totalCompetition;
         const data = {
             user: totalUsers || 0,
             increase: totalIncrease || 0,
             activity: totalActivity || 0,
             seminar: totalSeminars || 0,
-            totalUiUx,
-            totalItBusinessCase,
-            totalCaptureTheFlag,
         };
         return res.status(200).json(data);
     } catch (error) {

@@ -1,9 +1,8 @@
 "use client";
 import React, {useRef, useState} from 'react';
-import basepath from "@/components/utils/path";
 import {useRouter} from "next/navigation";
 
-export default function Nav({userData}) {
+export default function Nav({userData , basepath}) {
     const router = useRouter();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);

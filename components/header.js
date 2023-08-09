@@ -1,11 +1,10 @@
 "use client";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
-import basepath from "@/components/utils/path";
 import Nav from "@/components/nav";
 import Sidebar from "@/components/sidebar";
 
-export default function Header({active}) {
+export default function Header({active, apiurl, basepath}) {
     const router = useRouter();
     const [userData, setUserData] = useState({admin_name: '', admin_email: ''});
     const [successMessage, setSuccessMessage] = useState(null);
@@ -38,7 +37,7 @@ export default function Header({active}) {
                     </a>
                     <i className="bi bi-list toggle-sidebar-btn"></i>
                 </div>
-                <Nav userData={userData}/>
+                <Nav userData={userData} basepath={basepath}/>
                 {successMessage && showAlert && (
                     <div className="alert alert-success alert-dismissible fade show floating-alert" role="alert">
                         <i className="bi bi-check-circle me-1"></i>
@@ -48,7 +47,7 @@ export default function Header({active}) {
                     </div>
                 )}
             </header>
-            <Sidebar active={active} role={userData.admin_role}></Sidebar>
+            <Sidebar active={active} role={userData.admin_role} apiurl={apiurl} basepath={basepath}></Sidebar>
         </>
     )
 }
