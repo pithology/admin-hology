@@ -2,11 +2,18 @@
   "name": "admin-hology",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:HOLOGY-6-0/hology-admin.git"
+  },
   "scripts": {
     "dev": "next dev -p 5173",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "migrate": "prisma migrate dev",
+    "migrate:prod": "prisma migrate deploy",
+    "seed": "node api/seed.js",
     "server": "node server.js",
     "both": "concurrently \"npm run dev\" \"npm run server\""
   },

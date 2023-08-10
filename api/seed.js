@@ -1,21 +1,7 @@
-const readline = require('readline');
 const bcrypt = require('bcrypt');
 const prisma = require('./provider/client');
-const rl = readline.createInterface({
-    input: process.stdin, output: process.stdout,
-});
 
 async function seedAdmins() {
-    const confirmSeed = await new Promise((resolve) => {
-        rl.question('Do you want to seed admin users? (y/n): ', (answer) => {
-            resolve(answer.toLowerCase() === 'y');
-        });
-    });
-    if (!confirmSeed) {
-        console.log('Admin seeding cancelled.');
-        rl.close();
-        return;
-    }
     const adminData = [{
         email: 'dev@hology.ub.ac.id', name: 'Rafa', role: 'GOD', password: 'rafaturu'
     }, {
