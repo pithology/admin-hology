@@ -2,10 +2,12 @@
 import React, {useRef, useState} from 'react';
 import {useRouter} from "next/navigation";
 
-export default function Nav({userData , basepath}) {
+export default function Nav({userData, basepath}) {
     const router = useRouter();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const [showLogoutAlert, setShowLogoutAlert] = useState(false);
+
     const handleDropdownToggle = () => {
         setDropdownOpen(!dropdownOpen);
     };
@@ -24,7 +26,7 @@ export default function Nav({userData , basepath}) {
         localStorage.clear();
         router.push('/login');
     };
-    return (
+    return (<>
         <nav className="header-nav ms-auto">
             <ul className="d-flex align-items-center">
                 <li className="nav-item dropdown pe-3" ref={dropdownRef}>
@@ -58,7 +60,8 @@ export default function Nav({userData , basepath}) {
                             <hr className="dropdown-divider"/>
                         </li>
                         <li>
-                            <a className="dropdown-item d-flex align-items-center" href="#" onClick={handleLogout}>
+                            <a className="dropdown-item d-flex align-items-center" href="#"
+                               onClick={() => setShowLogoutAlert(true)}>
                                 <i className="bi bi-box-arrow-right"></i>
                                 <span>Log out</span>
                             </a>
@@ -67,7 +70,30 @@ export default function Nav({userData , basepath}) {
                 </li>
             </ul>
         </nav>
-    );
+        {showLogoutAlert && (
+            <div className="alert alert-warning alert-dismissible fade show floating-alert" role="alert"
+                 style={{top: '20%'}}>
+                <h4 className="alert-heading">Sign-out alert</h4>
+                <p>Apakah kamu yakin ingin sign-out?</p>
+                <button
+                    type="button"
+                    className="btn btn-outline-warning"
+                    onClick={() => {
+                        handleLogout();
+                        setShowLogoutAlert(false);
+                    }}
+                >
+                    Konfirmasi
+                </button>
+                <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                    onClick={() => setShowLogoutAlert(false)}
+                ></button>
+            </div>)}
+    </>);
 };
 
 

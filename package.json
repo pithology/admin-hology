@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "server": "node server.js",
-    "both": "concurrently \"npm run dev\" \"npm run server\"",
-    "seed": "node api/createAdmin.js"
+    "both": "concurrently \"npm run dev\" \"npm run server\""
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",

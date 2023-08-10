@@ -41,12 +41,12 @@ export default function Seminar({apiurl}) {
     return (
         <div className="card-body pt-4">
             <h3>Seminar Participant Datatable</h3>
-            <table className="table table-borderless" id="datatable">
+            <table className="table" id="datatable">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Fullname</th>
-                    <th scope="col">Ticker UUID</th>
+                    <th scope="col">Ticket UUID</th>
                     <th scope="col">Present</th>
                     <th scope="col">Instagram Story</th>
                 </tr>
@@ -59,7 +59,7 @@ export default function Seminar({apiurl}) {
                         <td>{item.ticket_uuid}</td>
                         <td>{item.present ? 'Yes' : 'No'}</td>
                         <td>
-                            <a href={item.ig_story} className="btn btn-primary btn-sm" target="_blank">Redirect to
+                            <a href={item.ig_story} className="btn btn-outline-primary btn-sm" target="_blank">Redirect to
                                 link...</a>
                         </td>
                     </tr>

@@ -3,8 +3,9 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import Announcement from "@/components/handler/page/competition/announcement";
 import EditDetail from "@/components/handler/page/competition/editDetail";
+import Proof from "@/components/handler/page/competition/proof";
 
-export default function Detail({apiurl}) {
+export default function Detail({apiurl, basepath}) {
     const router = useRouter();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -140,10 +141,7 @@ export default function Detail({apiurl}) {
                                     <div className="col-lg-3 col-md-4 label">No Rekening</div>
                                     <div className="col-lg-9 col-md-8">{data.no_rekening}</div>
                                 </div>
-                                <div className="row">
-                                    <div className="col-lg-3 col-md-4 label">Bukti Pembayaran</div>
-                                    <div className="col-lg-9 col-md-8">{data.payment_proof}</div>
-                                </div>
+                                <Proof src={data.payment_proof}></Proof>
                             </div>
                             <div
                                 className={`tab-pane fade profile-edit ${activeTab === "profile-edit" ? "show active" : ""}`}

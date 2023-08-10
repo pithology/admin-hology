@@ -3,21 +3,19 @@ const prisma = require("../provider/client");
 async function getCompetition(req, res) {
     try {
         const competitions = await prisma.competitions.findMany();
-        const competitionsWithTeamsCount = await Promise.all(
-            competitions.map(async (competition) => {
-                const teamsCount = await prisma.teams.count({
-                    where: {
-                        competition_id: competition.competition_id,
-                    },
-                });
-                return {
-                    id: competition.competition_id,
-                    name: competition.competition_name,
-                    description: competition.competition_description,
-                    teamsCount: teamsCount,
-                };
-            })
-        );
+        const competitionsWithTeamsCount = await Promise.all(competitions.map(async (competition) => {
+            const teamsCount = await prisma.teams.count({
+                where: {
+                    competition_id: competition.competition_id,
+                },
+            });
+            return {
+                id: competition.competition_id,
+                name: competition.competition_name,
+                description: competition.competition_description,
+                teamsCount: teamsCount,
+            };
+        }));
         return res.status(200).json(competitionsWithTeamsCount);
     } catch (error) {
         console.error(error);

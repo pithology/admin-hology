@@ -14,7 +14,7 @@ async function login(req, res) {
         if (!isPasswordValid) return res.status(401).json({message: 'Invalid password'});
 
         const token = jwt.sign({admin_id: admin.admin_id}, process.env.PRIVATE_KEY, {
-            expiresIn: '1h',
+            expiresIn: '3h',
         });
 
         const data = {

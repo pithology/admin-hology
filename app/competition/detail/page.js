@@ -27,7 +27,7 @@ export default function DetailCompetition() {
                 </div>
                 <section className="section profile">
                     <div className="row">
-                        <Detail apiurl={apiurl}></Detail>
+                        <Detail apiurl={apiurl} basepath={basepath}></Detail>
                     </div>
                 </section>
             </main>

@@ -4,28 +4,20 @@ const login = require('./controller/auth');
 const dashboard = require('./controller/dashboard');
 const competition = require('./controller/competition');
 const seminar = require('./controller/seminar');
+const user = require('./controller/user');
+const management = require('./controller/management');
 const authenticateToken = require('./middleware/authenticateToken');
-const authorizeRole = require("./middleware/authorizeRole");
 const prisma = require("./provider/client");
-
-const protectedRoutes = [
-    {path: '/management', allowedRoles: ['GOD']},
-];
-
-router.use((req, res, next) => {
-    if (protectedRoutes.some((route) => route.path === req.url)) {
-        authenticateToken(req, res, () => {
-            const allowedRoles = protectedRoutes.find((route) => route.path === req.url).allowedRoles;
-            authorizeRole(allowedRoles)(req, res, next);
-        });
-    } else next();
-});
 
 router.post('/login', login.login);
 router.post('/changePassword', authenticateToken, login.changePassword);
 
 router.get('/dashboard', dashboard.dashboard);
 router.get('/recent', dashboard.getLatestCompetitions);
+
+router.get('/user', user.getUser);
+router.get('/user/detail/:userId', user.getDetail);
+router.post('/user/verify/:userId', authenticateToken, user.verifyUser);
 
 router.get('/competition', competition.getCompetition);
 router.get('/competition/:competitionId', competition.getCompetitionDetail);
@@ -36,6 +28,11 @@ router.post('/competition/announcement/:teamId', authenticateToken, competition.
 router.get('/seminar', seminar.getSeminar);
 router.get('/seminar/history', seminar.getCheckIn)
 router.post('/seminar/checkin', authenticateToken, seminar.checkIn);
+
+router.get('/admin', authenticateToken, management.getAdmin);
+router.post('/admin/create', authenticateToken, management.createAdmin);
+router.post('/admin/edit/:Id', authenticateToken, management.editAdmin);
+router.post('/admin/compe/:Id', authenticateToken, management.editCompe);
 
 router.get('/status', async (req, res) => {
     try {

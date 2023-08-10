@@ -25,7 +25,6 @@ export default function Test({apiurl}) {
             setLoading(false);
         }
     };
-
     return (
         <div className="row pt-2">
             <div className="col-12">

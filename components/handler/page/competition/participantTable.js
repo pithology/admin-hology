@@ -58,7 +58,7 @@ export default function ParticipantTable({apiurl, basepath}) {
                         <div className="card">
                             <div className="card-body pt-4">
                                 <h3>Participant Datatable</h3>
-                                <table className="table table-borderless" id="datatable">
+                                <table className="table" id="datatable">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -86,7 +86,7 @@ export default function ParticipantTable({apiurl, basepath}) {
                                             <td>{item.join_token}</td>
                                             <td>
                                                 <a href={`${basepath}/competition/detail?team_id=${item.team_id}`}
-                                                   className="btn btn-primary btn-sm" target="_blank"><span
+                                                   className="btn btn-outline-primary btn-sm" target="_blank"><span
                                                     className="bi bi-file-earmark-text"> Detail</span></a>
                                             </td>
                                         </tr>
