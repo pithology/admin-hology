@@ -7,7 +7,8 @@ export default function Proof({src}) {
         <div className="row">
             <div className="col-lg-3 col-md-4 label">Bukti Pembayaran</div>
             <div className="col-lg-9 col-md-8">
-                <button type="button" className="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#largeModal">
+                <button type="button" className="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#largeModal">
                     Show
                 </button>
             </div>
@@ -20,7 +21,8 @@ export default function Proof({src}) {
                                     aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <img className="card-img" src={`https://api.hologyub.cloud/resources/payments/${fileName}`} alt="Payment Proof" />
+                            <img className="card-img" src={`https://api.hologyub.cloud/resources/payments/${fileName}`}
+                                 alt="Payment Proof"/>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
