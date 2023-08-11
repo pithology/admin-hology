@@ -52,7 +52,7 @@ export default function EditDetail({status, phase, teamId, nameTeam, apiurl}) {
                 <div className="col-sm-12">
                     <select className="form-select"
                             aria-label="Default select example" onChange={(e) => setStatus(e.target.value)}>
-                        <option selected>{status}</option>
+                        <option selected>{status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()}</option>
                         <option value="WAITING">Waiting</option>
                         <option value="ACCEPTED">Accepted</option>
                         <option value="REJECTED">Reject</option>
@@ -64,11 +64,11 @@ export default function EditDetail({status, phase, teamId, nameTeam, apiurl}) {
                 <div className="col-sm-12">
                     <select className="form-select"
                             aria-label="Default select example" onChange={(e) => setPhase(e.target.value)}>
-                        <option selected>{phase}</option>
+                        <option selected>{phase.charAt(0).toUpperCase() + phase.slice(1).toLowerCase()}</option>
                         <option value="PENYISIHAN">Penyisihan</option>
                         <option value="SEMIFINAL">Semifinal</option>
                         <option value="FINAL">Final</option>
-                        <option value="DISKUALIFIKASI">Diskualifikasi</option>
+                        <option value="DISKUALIFIKASI">Eliminated</option>
                     </select>
                 </div>
             </div>

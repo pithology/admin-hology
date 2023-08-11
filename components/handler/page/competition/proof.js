@@ -2,6 +2,7 @@
 import React from "react";
 
 export default function Proof({src}) {
+    const fileName = src.replace('public/uploads/payments/', '');
     return (
         <div className="row">
             <div className="col-lg-3 col-md-4 label">Bukti Pembayaran</div>
@@ -19,7 +20,7 @@ export default function Proof({src}) {
                                     aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <img src={`https://api.hologyub.cloud/resources/payments/${src}`} alt="Payment Proof" />
+                            <img className="card-img" src={`https://api.hologyub.cloud/resources/payments/${fileName}`} alt="Payment Proof" />
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
