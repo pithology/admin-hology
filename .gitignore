@@ -35,7 +35,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-/public/assets/
 /public/forms/
 /public/charts-apexcharts.html
 /public/charts-chartjs.html

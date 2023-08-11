@@ -18,7 +18,7 @@ export default function Seminar({apiurl}) {
     };
     useEffect(() => {
         fetchData().then();
-        import('@/assets/vendor/simple-datatables/simple-datatables').then((simpleDatatables) => {
+        import('@/public/assets/vendor/simple-datatables/simple-datatables').then((simpleDatatables) => {
             const datatables = document.querySelectorAll('#datatable');
             datatables.forEach((datatable) => {
                 new simpleDatatables.DataTable(datatable);

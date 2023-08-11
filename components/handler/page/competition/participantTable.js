@@ -20,7 +20,7 @@ export default function ParticipantTable({apiurl, basepath}) {
         const queryParams = new URLSearchParams(window.location.search);
         const competitionId = queryParams.get("competition_id") || null;
         fetchData({competitionId}).then();
-        import('@/assets/vendor/simple-datatables/simple-datatables').then((simpleDatatables) => {
+        import('@/public/assets/vendor/simple-datatables/simple-datatables').then((simpleDatatables) => {
             const datatables = document.querySelectorAll('#datatable');
             datatables.forEach((datatable) => {
                 new simpleDatatables.DataTable(datatable);
