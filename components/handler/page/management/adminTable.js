@@ -48,7 +48,7 @@ export default function AdminTable({apiurl, basepath}) {
         }
     };
     useEffect(() => {
-        import('@/assets/vendor/simple-datatables/simple-datatables').then((simpleDatatables) => {
+        import('@/public/assets/vendor/simple-datatables/simple-datatables').then((simpleDatatables) => {
             const datatables = document.querySelectorAll('#datatable');
             datatables.forEach((datatable) => {
                 new simpleDatatables.DataTable(datatable);

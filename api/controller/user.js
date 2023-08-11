@@ -80,8 +80,11 @@ async function getDetail(req, res) {
                 },
             },
         });
+        const defaultSeminars = {
+            ticket_uuid: '', present: false, ig_story: '',
+        };
         const response = {
-            ...data, user_seminars: userSeminars, detail_teams: detailTeams,
+            ...data, user_seminars: userSeminars || defaultSeminars, detail_teams: detailTeams,
         };
         return res.status(200).json(response);
     } catch (error) {
