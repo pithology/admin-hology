@@ -131,7 +131,7 @@ export default function Detail({apiurl, basepath}) {
                                 </div>
                                 <div className="row">
                                     <div className="col-lg-3 col-md-4 label">Phase</div>
-                                    <div className="col-lg-9 col-md-8">{data.phase === "DISKUALIFIKASI" ? "Eliminated" : data.phase.charAt(0).toUpperCase() + data.phase.slice(1).toLowerCase()}</div>
+                                    <div className="col-lg-9 col-md-8">{data.phase === "DISKUALIFIKASI" ? "Eliminated" : data.phase ? data.phase.charAt(0).toUpperCase() + data.phase.slice(1).toLowerCase() : ''}</div>
                                 </div>
                                 <h5 className="card-title">Payment Details</h5>
                                 <div className="row">

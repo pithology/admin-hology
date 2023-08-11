@@ -64,7 +64,8 @@ export default function EditDetail({status, phase, teamId, nameTeam, apiurl}) {
                 <div className="col-sm-12">
                     <select className="form-select"
                             aria-label="Default select example" onChange={(e) => setPhase(e.target.value)}>
-                        <option selected>{phase.charAt(0).toUpperCase() + phase.slice(1).toLowerCase()}</option>
+                        <option
+                            selected>{phase === "DISKUALIFIKASI" ? "Eliminated" : phase ? phase.charAt(0).toUpperCase() + phase.slice(1).toLowerCase() : ''}</option>
                         <option value="PENYISIHAN">Penyisihan</option>
                         <option value="SEMIFINAL">Semifinal</option>
                         <option value="FINAL">Final</option>
