@@ -179,6 +179,23 @@ async function setOrUpdateAnnouncement(req, res) {
     }
 }
 
+async function clearAnnouncement(req, res) {
+    try {
+        const {teamId} = req.params;
+        const clear = await prisma.pengumuman.updateMany({
+            where: {team_id: parseInt(teamId)},
+            data: {
+                deskripsi: '',
+                judul: '',
+            },
+        });
+        return res.status(200).json({message: 'succes delete'});
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({error: 'Internal server error'});
+    }
+}
+
 async function updateTeamStatusAndPhase(req, res) {
     try {
         const {teamId} = req.params;
@@ -208,5 +225,6 @@ module.exports = {
     getCompetitionDetail,
     getDetail,
     setOrUpdateAnnouncement,
-    updateTeamStatusAndPhase
+    updateTeamStatusAndPhase,
+    clearAnnouncement
 }

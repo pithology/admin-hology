@@ -26,6 +26,27 @@ export default function Announcement({teamId, apiurl}) {
     const handleModalShow = () => {
         setShowModal(true);
     }
+    const handleClearText = async() => {
+        try {
+            const response = await fetch(`${apiurl}/competition/announcement/clear/${teamId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token,
+                },
+            });
+            if (response.ok) {
+                await response.json();
+                localStorage.setItem('successMessage', 'berhasil hapus');
+                window.location.reload();
+            } else if (response.status === 403 || response.status === 401) {
+                localStorage.clear();
+                router.push('/401');
+            }
+        } catch (error) {
+            console.log("An error occurred during request.");
+        }
+    }
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         setTitleInvalid(false);
@@ -72,6 +93,8 @@ export default function Announcement({teamId, apiurl}) {
     };
     return (
         <div className="d-grid gap-2 mt-3">
+            <button className="btn btn-light" type="button" onClick={handleClearText}>Hapus
+            </button>
             <button className="btn btn-light" type="button" onClick={handleModalShow}>Replace
             </button>
             <div className={`modal fade ${showModal ? "show" : ""}`} id="Modal" tabIndex="-1"

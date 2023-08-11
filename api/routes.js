@@ -24,6 +24,7 @@ router.get('/competition/:competitionId', competition.getCompetitionDetail);
 router.get('/competition/detail/:teamId', competition.getDetail);
 router.post('/competition/statusphase/:teamId', authenticateToken, competition.updateTeamStatusAndPhase);
 router.post('/competition/announcement/:teamId', authenticateToken, competition.setOrUpdateAnnouncement);
+router.delete('/competition/announcement/clear/:teamId', authenticateToken, competition.clearAnnouncement);
 
 router.get('/seminar', seminar.getSeminar);
 router.get('/seminar/history', seminar.getCheckIn)
