@@ -5,7 +5,7 @@ const seedAdmins = require('./api/seed');
 const PORT = process.env.SERVER_PORT || 5000;
 
 app.use(express.json());
-const allowedOrigins = ['https://hology6-client.vercel.app', 'http://localhost:5173', 'https://hology.ub.ac.id', 'https://hology-admin.vercel.app',];
+const allowedOrigins = ['https://hology6-client.vercel.app', 'https://hology.ub.ac.id', 'https://hology.vercel.app',];
 
 app.use((req, res, next) => {
     const origin = req.headers.origin;
